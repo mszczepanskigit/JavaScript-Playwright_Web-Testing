@@ -18,6 +18,8 @@ test.only("New user full E2E test journey", async ({ page }) => {
 
     const checkout = new Checkout(page)
     await checkout.removeCheapestProduct()
+    await checkout.continueToCheckout()
+    
 
     await page.pause()
 })
