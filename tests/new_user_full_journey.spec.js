@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test"
 import { ProductPage } from "../page-objects/ProductPage.js"
 import { Navigation } from "../page-objects/Navigation.js"
 import { Checkout } from "../page-objects/Checkout.js"
+import { LoginPage } from "../page-objects/LoginPage.js"
 
 test.only("New user full E2E test journey", async ({ page }) => {
     
@@ -19,7 +20,10 @@ test.only("New user full E2E test journey", async ({ page }) => {
     const checkout = new Checkout(page)
     await checkout.removeCheapestProduct()
     await checkout.continueToCheckout()
-    
+
+    const login = new LoginPage(page)
+    await login.goToSignupPage()
+
 
     await page.pause()
 })
