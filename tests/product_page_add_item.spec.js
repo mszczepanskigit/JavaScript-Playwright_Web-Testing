@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test"
 
 test("Product Page Add To Basket", async ({ page }) => {
     // Go to the localhost page launched in the other terminal
-    await page.goto("localhost:2221")
+    await page.goto("/")
 
     // Find the first locator of Add to Basket button
     const addToBasketButton499 = page.locator('div').filter({ hasText: /^499\$Add to Basket$/ }).getByRole('button')
@@ -35,7 +35,13 @@ test("Product Page Add To Basket", async ({ page }) => {
     // Validate whether the basketCounter is 2
     await expect(basketCounter).toHaveText("2")
 
+    // Go to checkkout and check whether you are in the basket
+    const checkoutLink = page.getByRole('link', { name: 'Checkout' })
+    await checkoutLink.waitFor()
+    await checkoutLink.click()
+
+    await page.waitForURL("/basket")
+
     // Pause the page to breakdown the execution
     await page.pause()
 })
-
