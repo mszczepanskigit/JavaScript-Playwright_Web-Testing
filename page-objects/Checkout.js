@@ -15,15 +15,16 @@ export class Checkout {
         await this.basketItemPrice.first().waitFor()
         const allPriceText = await this.basketItemPrice.allInnerTexts()
         // console.warn({allPriceText})
-        
         const allPrices = allPriceText.map(price => parseInt(price.replace(/\D/g, ''), 10))
         const minPriceIdx = allPrices.indexOf(Math.min(...allPrices))
+
         await this.basketItemRemoveButton.nth(minPriceIdx).waitFor()
         await this.basketItemRemoveButton.nth(minPriceIdx).click()
-        await this.basketCards.nth(minPriceIdx).waitFor({ state: 'hidden' })
-        
+
+        await this.basketCards.nth(itemsBeforeRemoval - 1).waitFor({ state: 'hidden' })
         const itemsAfterRemoval = await this.basketCards.count()
         console.log({ itemsAfterRemoval })
+
         await expect(itemsAfterRemoval).toBeLessThan(itemsBeforeRemoval)
     }
 }
