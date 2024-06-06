@@ -28,9 +28,9 @@ export class ProductPage {
     sortByCheapest = async () => {
         await this.sortDropdown.waitFor()
         await this.productTitle.first().waitFor()
-        const productTitlesBefore = await this.productTitle.allInnerText()
+        const productTitlesBefore = await this.productTitle.allInnerTexts()
         await this.sortDropdown.selectOption("price-asc")
-        const productTitlesAfter = await this.productTitle.allInnerText()
+        const productTitlesAfter = await this.productTitle.allInnerTexts()
         expect(productTitlesAfter).not.toEqual(productTitlesBefore)
     }
 }
