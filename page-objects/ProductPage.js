@@ -5,6 +5,7 @@ export class ProductPage {
     constructor(page) {
         this.page = page
         this.addButtons = page.locator('[data-qa="product-button"]')
+        this.sortDropdown = page.locator('[data-qa="sort-dropdown"]')
     }
 
     visit = async () => {
@@ -21,5 +22,10 @@ export class ProductPage {
         await expect(theAddButton).toHaveText("Remove from Basket")
         const basketCountAfterAdding = await navigation.getBasketCount()
         await expect(basketCountAfterAdding).toBeGreaterThan(basketCountBeforeAdding)
+    }
+
+    sortByCheapest = async () => {
+        await this.sortDropdown.waitFor()
+        await this.sortDropdown.selectOption("price-asc")
     }
 }
