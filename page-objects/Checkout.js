@@ -25,6 +25,6 @@ export class Checkout {
         const itemsAfterRemoval = await this.basketCards.count()
         console.log({ itemsAfterRemoval })
 
-        await expect(itemsAfterRemoval).toBeLessThan(itemsBeforeRemoval)
+        expect(itemsAfterRemoval).toBeLessThan(itemsBeforeRemoval)
     }
 }
