@@ -4,6 +4,7 @@ import { Navigation } from "../page-objects/Navigation.js"
 import { Checkout } from "../page-objects/Checkout.js"
 import { LoginPage } from "../page-objects/LoginPage.js"
 import { RegisterPage } from "../page-objects/RegisterPage.js"
+import { v4 as uuid } from 'uuid'
 
 test.only("New user full E2E test journey", async ({ page }) => {
     
@@ -26,7 +27,9 @@ test.only("New user full E2E test journey", async ({ page }) => {
     await login.goToSignupPage()
 
     const register = new RegisterPage(page)
-    await register.signUpAsNewUser()
+    const email = "test-" + uuid() + "-@dom.com"
+    const password = uuid()
+    await register.signUpAsNewUser(email, password)
 
 
     await page.pause()
