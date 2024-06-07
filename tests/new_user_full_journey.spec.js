@@ -6,7 +6,7 @@ import { LoginPage } from "../page-objects/LoginPage.js"
 import { RegisterPage } from "../page-objects/RegisterPage.js"
 import { DeliveryDetails } from "../page-objects/DelivaryDetails.js"
 import { v4 as uuid } from "uuid"
-import { generateRandomFiveDigitCode } from "../utils/GenerateDataUtils"
+import { deliveryDetails_save, deliveryDetails_notSave } from "../data/DeliveryDetailsInDicts.js"
 
 test.only("1st user full E2E test journey", async ({ page }) => {
     
@@ -34,14 +34,7 @@ test.only("1st user full E2E test journey", async ({ page }) => {
     await register.signUpAsNewUser(email, password)
 
     const deliveryDetails = new DeliveryDetails(page)
-    const firstName = "Tester John"
-    const lastName = "Smith"
-    const street = "Alabama Alley 69"
-    const postCode = generateRandomFiveDigitCode()
-    const city = "Malmo"
-    const country = "Sweden"
-    const saveDecision = true
-    await deliveryDetails.fillDeliveryDetails(firstName, lastName, street, postCode, city, country, saveDecision)
+    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_save))
 
     await page.pause()
 })
@@ -72,13 +65,7 @@ test.only("2nd user full E2E test journey", async ({ page }) => {
     await register.signUpAsNewUser(email, password)
 
     const deliveryDetails = new DeliveryDetails(page)
-    const firstName = "Tester Yan"
-    const lastName = "Kovalsky"
-    const street = "Alabama Alley 69"
-    const postCode = generateRandomFiveDigitCode()
-    const city = "Minsk"
-    const country = "Belarus"
-    await deliveryDetails.fillDeliveryDetails(firstName, lastName, street, postCode, city, country)
+    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_notSave))
 
     await page.pause()
 })
