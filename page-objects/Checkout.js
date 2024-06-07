@@ -12,7 +12,6 @@ export class Checkout {
     removeCheapestProduct = async () => {
         await this.basketCards.first().waitFor()
         const itemsBeforeRemoval = await this.basketCards.count()
-        console.log({ itemsBeforeRemoval })
         await this.basketItemPrice.first().waitFor()
         const allPriceText = await this.basketItemPrice.allInnerTexts()
         // console.warn({allPriceText})
@@ -24,7 +23,6 @@ export class Checkout {
 
         await this.basketCards.nth(itemsBeforeRemoval - 1).waitFor({ state: 'hidden' })
         const itemsAfterRemoval = await this.basketCards.count()
-        console.log({ itemsAfterRemoval })
 
         expect(itemsAfterRemoval).toBeLessThan(itemsBeforeRemoval)
     }
