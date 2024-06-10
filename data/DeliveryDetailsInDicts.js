@@ -1,6 +1,6 @@
 import { generateRandomFiveDigitCode } from "../utils/GenerateDataUtils"
 
-export const deliveryDetails_save ={
+export const deliveryDetails_1 ={
     firstName: "Tester John",
     lastName: "Smith",
     street: "Alabama Alley 69",
@@ -9,7 +9,7 @@ export const deliveryDetails_save ={
     country: "Sweden"
 }
 
-export const deliveryDetails_notSave ={
+export const deliveryDetails_2 ={
     firstName: "Tester Yan",
     lastName: "Kovalsky",
     street: "Red Street 45",
