@@ -1,8 +1,11 @@
+import { isDesktopViewPort } from "../utils/CheckPlatform"
+
 export class Navigation {
     constructor(page) {
         this.page = page
         this.basketCounter = page.locator('[data-qa="header-basket-count"]')
         this.checkoutLink = page.getByRole('link', { name: 'Checkout' })
+        this.barsAtTheTop = page.locator('svg.fa-bars')
     }
 
     getBasketCount = async () => {
@@ -11,6 +14,11 @@ export class Navigation {
     }
 
     goToCheckout = async () => {
+        if (!isDesktopViewPort(this.page)) {
+            await this.barsAtTheTop.waitFor()
+            await this.barsAtTheTop.click()
+            await this.page.pause()
+        }
         await this.checkoutLink.waitFor()
         await this.checkoutLink.click()
         await this.page.waitForURL("/basket")
