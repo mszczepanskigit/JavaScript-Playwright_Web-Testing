@@ -66,6 +66,8 @@ test.only("2nd user full E2E test journey", async ({ page }) => {
 
     const deliveryDetails = new DeliveryDetails(page)
     await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_notSave))
+    await deliveryDetails.saveDetails()
+    
 
     await page.pause()
 })

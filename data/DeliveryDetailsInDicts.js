@@ -6,8 +6,7 @@ export const deliveryDetails_save ={
     street: "Alabama Alley 69",
     postCode: generateRandomFiveDigitCode(),
     city: "Malmo",
-    country: "Sweden",
-    saveDecision: true
+    country: "Sweden"
 }
 
 export const deliveryDetails_notSave ={
