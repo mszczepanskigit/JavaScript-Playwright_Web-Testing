@@ -8,6 +8,7 @@ import { DeliveryDetails } from "../page-objects/DelivaryDetails.js"
 import { v4 as uuid } from "uuid"
 import { deliveryDetails_1, deliveryDetails_2 } from "../data/DeliveryDetailsInDicts.js"
 import { PaymentPage } from "../page-objects/PaymentPage.js"
+import { paymentDetails_1 } from "../data/PaymentDetailsInDicts.js"
 
 test.only("Sanity test", async ({ page }) => {
     
@@ -72,6 +73,8 @@ test.only("Full user E2E test journey", async ({ page }) => {
 
     const paymentPage = new PaymentPage(page)
     await paymentPage.activateDiscount()
+    await paymentPage.fillPaymentDetails(...Object.values(paymentDetails_1))
+    await paymentPage.payForThePurchase()
 
     await page.pause()
 })
