@@ -13,7 +13,7 @@ export class DeliveryDetails {
         this.savedAddressContainer = page.locator('[data-qa="saved-address-container"]')
     }
 
-    fillDeliveryDetails = async (firstName, lastName, street, postCode, city, country, saveDecision = false) => {
+    fillDeliveryDetails = async (firstName, lastName, street, postCode, city, country) => {
     await this.firstNameBar.waitFor()
     await this.firstNameBar.fill(firstName)
 
@@ -31,13 +31,18 @@ export class DeliveryDetails {
 
     await this.countryDropdown.waitFor()
     await this.countryDropdown.selectOption(country)
-
-    if (saveDecision) {
-        await this.saveAddressButton.waitFor()
-        await this.saveAddressButton.click()
-        await this.savedAddressContainer.waitFor()
     }
-    await this.continueButton.waitFor()
-    await this.continueButton.click()
+
+    saveDetails = async (saveDecision = false) => {
+        if (saveDecision) {
+            await this.saveAddressButton.waitFor()
+            await this.saveAddressButton.click()
+            await this.savedAddressContainer.waitFor()
+        }
+    }
+
+    goToPayment = async () => {
+        await this.continueButton.waitFor()
+        await this.continueButton.click()
     }
 }
