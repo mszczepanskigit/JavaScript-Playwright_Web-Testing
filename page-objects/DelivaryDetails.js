@@ -72,5 +72,6 @@ export class DeliveryDetails {
     goToPayment = async () => {
         await this.continueButton.waitFor()
         await this.continueButton.click()
+        await this.page.waitForURL(/\/payment/, { timeout: 2000 })
     }
 }
