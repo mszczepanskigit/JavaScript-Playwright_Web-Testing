@@ -17,7 +17,6 @@ export class Navigation {
         if (!isDesktopViewPort(this.page)) {
             await this.barsAtTheTop.waitFor()
             await this.barsAtTheTop.click()
-            await this.page.pause()
         }
         await this.checkoutLink.waitFor()
         await this.checkoutLink.click()
