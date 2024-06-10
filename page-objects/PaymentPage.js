@@ -16,8 +16,14 @@ export class PaymentPage {
         const code = await this.discountCode.innerText()
 
         await this.discountBar.waitFor()
+        //Option 1 using .fill() with await expect()
         await this.discountBar.fill(code)
         await expect(this.discountBar).toHaveValue(code)
+        //Option 2 using slow typing
+        //await this.discountBar.focus()
+        //await this.page.keyboard.type(code, {delay: 1010})
+        //expect(await this.discountBar.inputValue()).toBe(code)
+
 
         await this.textToGetStriked.waitFor()
         const beforeStrikeClass = await this.textToGetStriked.getAttribute('class')
@@ -30,7 +36,5 @@ export class PaymentPage {
         const afterStrikeClass = await this.textToGetStriked.getAttribute('class')
         expect(afterStrikeClass).toBe('mt-6 line-through')
         await expect(this.discountActiveMessage).toHaveText('Discount activated!')
-
-
     }
 }
