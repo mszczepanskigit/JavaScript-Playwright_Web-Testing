@@ -9,6 +9,8 @@ export class PaymentPage {
         this.submitDiscountButton = page.getByRole('button', { name: 'Submit discount' })
         this.discountActiveMessage = page.locator('[data-qa="discount-active-message"]')
         this.textToGetStriked = page.locator('.mt-6') // dot allows you to specify that you are looking within the class objects
+        this.initialTotalPrice = page.locator('[data-qa="total-value"]')
+        this.discountedTotalPrice = page.locator('[data-qa="total-with-discount-value"]')
     }
 
     activateDiscount = async () => {
@@ -36,5 +38,10 @@ export class PaymentPage {
         const afterStrikeClass = await this.textToGetStriked.getAttribute('class')
         expect(afterStrikeClass).toBe('mt-6 line-through')
         await expect(this.discountActiveMessage).toHaveText('Discount activated!')
+
+        await this.initialTotalPrice.waitFor()
+        await this.discountedTotalPrice.waitFor()
+        expect(parseInt((await this.discountedTotalPrice.innerText()).replace(/[^0-9.]/g, ''), 10)).
+        toBeLessThanOrEqual(parseInt((await this.initialTotalPrice.innerText()).replace(/[^0-9.]/g, ''), 10))
     }
 }
