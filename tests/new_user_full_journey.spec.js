@@ -37,6 +37,8 @@ test.only("Sanity test", async ({ page }) => {
 
     const deliveryDetails = new DeliveryDetails(page)
     await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_1))
+    await deliveryDetails.saveDetails()
+    await deliveryDetails.goToPayment()
 })
 
 test.only("Full user E2E test journey", async ({ page }) => {
