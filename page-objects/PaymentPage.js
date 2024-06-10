@@ -32,6 +32,7 @@ export class PaymentPage {
         expect(beforeStrikeClass).toBe('mt-6 ')
 
         await this.submitDiscountButton.waitFor()
+        await expect(this.discountActiveMessage).not.toBeVisible()
         await this.submitDiscountButton.click()
         await this.discountActiveMessage.waitFor()
 
