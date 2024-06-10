@@ -6,9 +6,9 @@ import { LoginPage } from "../page-objects/LoginPage.js"
 import { RegisterPage } from "../page-objects/RegisterPage.js"
 import { DeliveryDetails } from "../page-objects/DelivaryDetails.js"
 import { v4 as uuid } from "uuid"
-import { deliveryDetails_save, deliveryDetails_notSave } from "../data/DeliveryDetailsInDicts.js"
+import { deliveryDetails_1, deliveryDetails_2 } from "../data/DeliveryDetailsInDicts.js"
 
-test.only("1st user full E2E test journey", async ({ page }) => {
+test.only("Sanity test", async ({ page }) => {
     
     const productsPage = new ProductPage(page)
     await productsPage.visit()
@@ -34,12 +34,10 @@ test.only("1st user full E2E test journey", async ({ page }) => {
     await register.signUpAsNewUser(email, password)
 
     const deliveryDetails = new DeliveryDetails(page)
-    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_save))
-
-    await page.pause()
+    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_1))
 })
 
-test.only("2nd user full E2E test journey", async ({ page }) => {
+test.only("Full user E2E test journey", async ({ page }) => {
     
     const productsPage = new ProductPage(page)
     await productsPage.visit()
@@ -65,9 +63,11 @@ test.only("2nd user full E2E test journey", async ({ page }) => {
     await register.signUpAsNewUser(email, password)
 
     const deliveryDetails = new DeliveryDetails(page)
-    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_notSave))
-    await deliveryDetails.saveDetails()
-    
+    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_1))
+    await deliveryDetails.saveDetails(true)
+    await deliveryDetails.fillDeliveryDetails(...Object.values(deliveryDetails_2))
+    await deliveryDetails.saveDetails(true)
+    await deliveryDetails.goToPayment()
 
     await page.pause()
 })
