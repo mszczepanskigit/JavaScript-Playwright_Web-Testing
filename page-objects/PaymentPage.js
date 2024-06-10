@@ -17,7 +17,7 @@ export class PaymentPage {
         this.dataValidBar = page.getByPlaceholder('Valid until')
         this.CVCBar = page.getByPlaceholder('Credit card CVC')
 
-        this.payButton = page.getByPlaceholder('Credit card owner')
+        this.payButton = page.getByRole('button', { name: 'Pay' })
     }
 
     activateDiscount = async () => {
@@ -74,5 +74,6 @@ export class PaymentPage {
     payForThePurchase = async () => {
         await this.payButton.waitFor()
         await this.payButton.click()
+        await this.page.waitForURL(/\/thank-you/, { timeout: 2000 })
     }
 }
