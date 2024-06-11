@@ -10,7 +10,7 @@ import { deliveryDetails_1, deliveryDetails_2 } from "../data/DeliveryDetailsInD
 import { PaymentPage } from "../page-objects/PaymentPage.js"
 import { paymentDetails_1 } from "../data/PaymentDetailsInDicts.js"
 
-test.only("Sanity test", async ({ page }) => {
+test("Sanity test", async ({ page }) => {
     
     const productsPage = new ProductPage(page)
     await productsPage.visit()
@@ -41,7 +41,7 @@ test.only("Sanity test", async ({ page }) => {
     await deliveryDetails.goToPayment()
 })
 
-test.only("Full user E2E test journey", async ({ page }) => {
+test("Full user E2E test journey", async ({ page }) => {
     
     const productsPage = new ProductPage(page)
     await productsPage.visit()
