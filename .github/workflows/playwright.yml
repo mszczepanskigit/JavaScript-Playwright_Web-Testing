@@ -13,7 +13,7 @@ jobs:
         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
     steps: 
       - name: Checkout repository
-        uses: actions.checkout@v2
+        uses: actions/checkout@v2
       - name: Run tests
         run: |
           echo 'Start the shopping store app'
