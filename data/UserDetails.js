@@ -1,4 +1,4 @@
 export const testerUser = {
-    username: "tester",
+    username: "admin",
     password: process.env.ADMIN_PASSWORD
 }
