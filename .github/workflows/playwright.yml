@@ -8,7 +8,7 @@ jobs:
   playwright-tests:
     runs-on: ubuntu-22.04
     container:
-      image: mcr.microsofr.com/playwright:v1.44.1-jammy
+      image: mcr.microsoft.com/playwright:v1.44.1-jammy
       env: 
         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
     steps: 
