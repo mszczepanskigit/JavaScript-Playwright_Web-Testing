@@ -77,6 +77,4 @@ test("Full user E2E test journey", async ({ page }) => {
     await paymentPage.activateDiscount()
     await paymentPage.fillPaymentDetails(...Object.values(paymentDetails_1))
     await paymentPage.payForThePurchase()
-
-    await page.pause()
 })
